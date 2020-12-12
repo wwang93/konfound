@@ -58,16 +58,19 @@ pkonfound(est_eff = 2,
           std_err = .4, 
           n_obs = 100, 
           n_covariates = 3)
-#> Percent Bias Necessary to Invalidate the Inference:
-#> To invalidate an inference, 60.3% of the estimate would have to be due to bias. This is based on a threshold of 0.794 for statistical significance (alpha = 0.05).
-#> To invalidate an inference, 60 observations would have to be replaced with cases for which the effect is 0 (RIR = 60).
-#> See Frank et al. (2013) for a description of the method
-#> Citation: Frank, K.A., Maroulis, S., Duong, M., and Kelcey, B. 2013. What would it take to change an inference? Using Rubin's causal model to interpret the robustness of causal inferences. Education, Evaluation and Policy Analysis, 35 437-460.
-#> Impact Threshold for a Confounding Variable:
-#> The minimum impact to invalidate an inference for a null hypothesis of 0 effect is based on a correlation of 0.568 with the outcome and at 0.568 with the predictor of interest (conditioning on observed covariates) based on a threshold of 0.201 for statistical significance (alpha = 0.05).
-#> Correspondingly the impact of an omitted variable (as defined in Frank 2000) must be 0.568 X 0.568 = 0.323 to invalidate an inference for a null hypothesis of 0 effect.
-#> See Frank (2000) for a description of the method
-#> Citation: Frank, K. 2000. Impact of a confounding variable on the inference of a regression coefficient. Sociological Methods and Research, 29 (2), 147-194
+#> Robustness of Inference to Replacement (RIR):
+#> To invalidate an inference,  60.3 % of the estimate would have to be due to bias. 
+#> This is based on a threshold of 0.794 for statistical significance (alpha = 0.05).
+#> 
+#> To invalidate an inference,  60  observations would have to be replaced with cases
+#> for which the effect is 0 (RIR = 60).
+#> 
+#> See Frank et al. (2013) for a description of the method.
+#> 
+#> Citation: Frank, K.A., Maroulis, S., Duong, M., and Kelcey, B. (2013).
+#> What would it take to change an inference?
+#> Using Rubin's causal model to interpret the robustness of causal inferences.
+#> Education, Evaluation and Policy Analysis, 35 437-460.
 #> For other forms of output, run ?pkonfound and inspect the to_return argument
 #> For models fit in R, consider use of konfound().
 ```
@@ -115,16 +118,19 @@ as follows, specifying the fitted model object:
 
 ``` r
 konfound(m1, wt)
-#> Percent Bias Necessary to Invalidate the Inference:
-#> To invalidate an inference, 66.629% of the estimate would have to be due to bias. This is based on a threshold of -1.294 for statistical significance (alpha = 0.05).
-#> To invalidate an inference, 21 observations would have to be replaced with cases for which the effect is 0 (RIR = 21).
-#> See Frank et al. (2013) for a description of the method
-#> Citation: Frank, K.A., Maroulis, S., Duong, M., and Kelcey, B. 2013. What would it take to change an inference? Using Rubin's causal model to interpret the robustness of causal inferences. Education, Evaluation and Policy Analysis, 35 437-460.
-#> Impact Threshold for a Confounding Variable:
-#> The minimum impact to invalidate an inference for a null hypothesis of 0 effect is based on a correlation of 0.791 with the outcome and at 0.791 with the predictor of interest (conditioning on observed covariates) based on a threshold of -0.366 for statistical significance (alpha = 0.05).
-#> Correspondingly the impact of an omitted variable (as defined in Frank 2000) must be 0.791 X 0.791 = 0.626 to invalidate an inference for a null hypothesis of 0 effect.
-#> See Frank (2000) for a description of the method
-#> Citation: Frank, K. 2000. Impact of a confounding variable on the inference of a regression coefficient. Sociological Methods and Research, 29 (2), 147-194
+#> Robustness of Inference to Replacement (RIR):
+#> To invalidate an inference,  66.629 % of the estimate would have to be due to bias. 
+#> This is based on a threshold of -1.294 for statistical significance (alpha = 0.05).
+#> 
+#> To invalidate an inference,  21  observations would have to be replaced with cases
+#> for which the effect is 0 (RIR = 21).
+#> 
+#> See Frank et al. (2013) for a description of the method.
+#> 
+#> Citation: Frank, K.A., Maroulis, S., Duong, M., and Kelcey, B. (2013).
+#> What would it take to change an inference?
+#> Using Rubin's causal model to interpret the robustness of causal inferences.
+#> Education, Evaluation and Policy Analysis, 35 437-460.
 #> For more detailed output, consider setting `to_return` to table
 #> To consider other predictors of interest, consider setting `test_all` to TRUE.
 ```
@@ -204,5 +210,6 @@ file).
 
 ### Code of Conduct
 
-gPlease note that this project is released with a Contributor Code of
-Conduct available at <http://contributor-covenant.org/version/1/0/0/>
+Please note that this project is released with a Contributor Code of
+Conduct available at
+<https://www.contributor-covenant.org/version/1/0/0/>

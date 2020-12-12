@@ -130,16 +130,19 @@
           std_err <span class="op">=</span> <span class="fl">.4</span>, 
           n_obs <span class="op">=</span> <span class="fl">100</span>, 
           n_covariates <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
-<span class="co">#&gt; Percent Bias Necessary to Invalidate the Inference:</span>
-<span class="co">#&gt; To invalidate an inference, 60.3% of the estimate would have to be due to bias. This is based on a threshold of 0.794 for statistical significance (alpha = 0.05).</span>
-<span class="co">#&gt; To invalidate an inference, 60 observations would have to be replaced with cases for which the effect is 0 (RIR = 60).</span>
-<span class="co">#&gt; See Frank et al. (2013) for a description of the method</span>
-<span class="co">#&gt; Citation: Frank, K.A., Maroulis, S., Duong, M., and Kelcey, B. 2013. What would it take to change an inference? Using Rubin's causal model to interpret the robustness of causal inferences. Education, Evaluation and Policy Analysis, 35 437-460.</span>
-<span class="co">#&gt; Impact Threshold for a Confounding Variable:</span>
-<span class="co">#&gt; The minimum impact to invalidate an inference for a null hypothesis of 0 effect is based on a correlation of 0.568 with the outcome and at 0.568 with the predictor of interest (conditioning on observed covariates) based on a threshold of 0.201 for statistical significance (alpha = 0.05).</span>
-<span class="co">#&gt; Correspondingly the impact of an omitted variable (as defined in Frank 2000) must be 0.568 X 0.568 = 0.323 to invalidate an inference for a null hypothesis of 0 effect.</span>
-<span class="co">#&gt; See Frank (2000) for a description of the method</span>
-<span class="co">#&gt; Citation: Frank, K. 2000. Impact of a confounding variable on the inference of a regression coefficient. Sociological Methods and Research, 29 (2), 147-194</span>
+<span class="co">#&gt; Robustness of Inference to Replacement (RIR):</span>
+<span class="co">#&gt; To invalidate an inference,  60.3 % of the estimate would have to be due to bias. </span>
+<span class="co">#&gt; This is based on a threshold of 0.794 for statistical significance (alpha = 0.05).</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; To invalidate an inference,  60  observations would have to be replaced with cases</span>
+<span class="co">#&gt; for which the effect is 0 (RIR = 60).</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; See Frank et al. (2013) for a description of the method.</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Citation: Frank, K.A., Maroulis, S., Duong, M., and Kelcey, B. (2013).</span>
+<span class="co">#&gt; What would it take to change an inference?</span>
+<span class="co">#&gt; Using Rubin's causal model to interpret the robustness of causal inferences.</span>
+<span class="co">#&gt; Education, Evaluation and Policy Analysis, 35 437-460.</span>
 <span class="co">#&gt; For other forms of output, run ?pkonfound and inspect the to_return argument</span>
 <span class="co">#&gt; For models fit in R, consider use of konfound().</span></code></pre></div>
 </div>
@@ -180,16 +183,19 @@
 <p>Sensitivity analysis for the effect for <code>wt</code> on <code>mpg</code> can be carried out as follows, specifying the fitted model object:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/konfound.html">konfound</a></span><span class="op">(</span><span class="va">m1</span>, <span class="va">wt</span><span class="op">)</span>
-<span class="co">#&gt; Percent Bias Necessary to Invalidate the Inference:</span>
-<span class="co">#&gt; To invalidate an inference, 66.629% of the estimate would have to be due to bias. This is based on a threshold of -1.294 for statistical significance (alpha = 0.05).</span>
-<span class="co">#&gt; To invalidate an inference, 21 observations would have to be replaced with cases for which the effect is 0 (RIR = 21).</span>
-<span class="co">#&gt; See Frank et al. (2013) for a description of the method</span>
-<span class="co">#&gt; Citation: Frank, K.A., Maroulis, S., Duong, M., and Kelcey, B. 2013. What would it take to change an inference? Using Rubin's causal model to interpret the robustness of causal inferences. Education, Evaluation and Policy Analysis, 35 437-460.</span>
-<span class="co">#&gt; Impact Threshold for a Confounding Variable:</span>
-<span class="co">#&gt; The minimum impact to invalidate an inference for a null hypothesis of 0 effect is based on a correlation of 0.791 with the outcome and at 0.791 with the predictor of interest (conditioning on observed covariates) based on a threshold of -0.366 for statistical significance (alpha = 0.05).</span>
-<span class="co">#&gt; Correspondingly the impact of an omitted variable (as defined in Frank 2000) must be 0.791 X 0.791 = 0.626 to invalidate an inference for a null hypothesis of 0 effect.</span>
-<span class="co">#&gt; See Frank (2000) for a description of the method</span>
-<span class="co">#&gt; Citation: Frank, K. 2000. Impact of a confounding variable on the inference of a regression coefficient. Sociological Methods and Research, 29 (2), 147-194</span>
+<span class="co">#&gt; Robustness of Inference to Replacement (RIR):</span>
+<span class="co">#&gt; To invalidate an inference,  66.629 % of the estimate would have to be due to bias. </span>
+<span class="co">#&gt; This is based on a threshold of -1.294 for statistical significance (alpha = 0.05).</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; To invalidate an inference,  21  observations would have to be replaced with cases</span>
+<span class="co">#&gt; for which the effect is 0 (RIR = 21).</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; See Frank et al. (2013) for a description of the method.</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Citation: Frank, K.A., Maroulis, S., Duong, M., and Kelcey, B. (2013).</span>
+<span class="co">#&gt; What would it take to change an inference?</span>
+<span class="co">#&gt; Using Rubin's causal model to interpret the robustness of causal inferences.</span>
+<span class="co">#&gt; Education, Evaluation and Policy Analysis, 35 437-460.</span>
 <span class="co">#&gt; For more detailed output, consider setting `to_return` to table</span>
 <span class="co">#&gt; To consider other predictors of interest, consider setting `test_all` to TRUE.</span></code></pre></div>
 </div>
@@ -230,9 +236,9 @@
 <p>The above functions have a number of extensions; the below tables represent how <code><a href="reference/pkonfound.html">pkonfound()</a></code> and <code><a href="reference/konfound.html">konfound()</a></code> can be used:</p>
 <table class="table">
 <colgroup>
-<col width="6%">
-<col width="30%">
-<col width="63%">
+<col width="5%">
+<col width="38%">
+<col width="56%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">Outcome</th>
@@ -247,9 +253,9 @@
 </tr>
 <tr class="even">
 <td align="left">Logistic</td>
-<td align="left"><code><a href="reference/pkonfound.html">pkonfound(est_eff, std_err, n_obs, n_covariates)</a></code></td>
+<td align="left"><code><a href="reference/pkonfound.html">pkonfound(est_eff, std_err, n_obs, n_covariates, model_type = 'logistic')</a></code></td>
 <td align="left">
-<code><a href="reference/pkonfound.html">pkonfound(est_eff, std_err, n_obs, n_covariates, n_treat, logistic = TRUE)</a></code> or <code><a href="reference/pkonfound.html">pkonfound(a, b, c, d)</a></code>
+<code><a href="reference/pkonfound.html">pkonfound(est_eff, std_err, n_obs, n_covariates, n_treat, model_type = 'logistic')</a></code> or <code><a href="reference/pkonfound.html">pkonfound(a, b, c, d)</a></code>
 </td>
 </tr>
 </tbody>
@@ -269,7 +275,7 @@
 <tr class="even">
 <td align="left">Logistic</td>
 <td align="left"><code><a href="reference/konfound.html">konfound(m, var)</a></code></td>
-<td align="left"><code>konfound(m, var, two_by_two = TRUE</code></td>
+<td align="left"><code><a href="reference/konfound.html">konfound(m, var, two_by_two = TRUE)</a></code></td>
 </tr>
 </tbody>
 </table>
@@ -297,7 +303,7 @@
 <div id="code-of-conduct" class="section level3">
 <h3 class="hasAnchor">
 <a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h3>
-<p>Please note that this project is released with a Contributor Code of Conduct available at <a href="http://contributor-covenant.org/version/1/0/0/" class="uri">http://contributor-covenant.org/version/1/0/0/</a></p>
+<p>Please note that this project is released with a Contributor Code of Conduct available at <a href="https://www.contributor-covenant.org/version/1/0/0/" class="uri">https://www.contributor-covenant.org/version/1/0/0/</a></p>
 </div>
 </div>
 
