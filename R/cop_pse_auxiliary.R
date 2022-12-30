@@ -187,10 +187,86 @@ verify_reg_Gzcv = function(n_obs, sdx, sdy, sdz, sdcv,
     }
 }
 
-## TO DO 
-## need to code the other solutions for pse as well 
-## then see how the different solutions perform in different scenarios (run the regression)
-cal_pse <- function(thr, kryx){
+cal_pse1 <- function(thr, kryx){
+    # calculations for preserving standard error
+    i1 <- complex(real = 1, imaginary = -sqrt(3))
+    i2 <- complex(real = 1, imaginary = sqrt(3))
+    temp <- -((2 - thr^2 + 2 * thr * kryx - 2 * kryx^2)/(3 * (-1 + kryx^2))) - 
+        ((2^(1/3)) * (-(2 - thr^2 + 2 * thr * kryx - 2 * kryx^2)^2 + 6 * (-1 + kryx^2) * (thr^2 - 2 * thr * kryx + kryx^2)))/
+        (3 * (-1 + kryx^2) * (-16 + 15 * thr^2 + 6 * thr^4 + 2 * thr^6 - 30 * thr * kryx - 24 * thr^3 * kryx - 12 * thr^5 * kryx + 39 * kryx^2 + 
+                                  12 * thr^2 * kryx^2 + 18 * thr^4 * kryx^2 + 24 * thr * kryx^3 + 8 * thr^3 * kryx^3 - 30 * kryx^4 - 27 * thr^2 * kryx^4 + 
+                                  6 * thr * kryx^5 + 7 * kryx^6 + sqrt(as.complex((-16 + 15 * thr^2 + 6 * thr^4 + 2 * thr^6 - 30 * thr * kryx - 24 * thr^3 * kryx - 12 * thr^5 * kryx + 
+                                                                                       39 * kryx^2 + 12 * thr^2 * kryx^2 + 18 * thr^4 * kryx^2 + 24 * thr * kryx^3 + 8 * thr^3 * kryx^3 - 
+                                                                                       30 * kryx^4 - 27 * thr^2 * kryx^4 + 6 * thr * kryx^5 + 7 * kryx^6)^2 + 
+                                                                                      4 * (-(2 - thr^2 + 2 * thr * kryx - 2 * kryx^2)^2 + 6 * (-1 + kryx^2) * (thr^2 - 2 * thr * kryx + 
+                                                                                                                                                                   kryx^2))^3)))^(1/3)) + 
+        1/(3 * 2^(1/3) * (-1 + kryx^2)) * (-16 + 15 * thr^2 + 6 * thr^4 + 2 * thr^6 - 30 * thr * kryx - 24 * thr^3 * kryx - 12 * thr^5 * kryx + 39 * kryx^2 + 
+                                               12 * thr^2 * kryx^2 + 18 * thr^4 * kryx^2 + 24 * thr * kryx^3 + 8 * thr^3 * kryx^3 - 30 * kryx^4 - 27 * thr^2 * kryx^4 +
+                                               6 * thr * kryx^5 + 7 * kryx^6 + 
+                                               sqrt(as.complex((-16 + 15 * thr^2 + 6 * thr^4 + 2 * thr^6 - 30 * thr * kryx - 24 * thr^3 * kryx - 12 * thr^5 * kryx + 
+                                                                    39 * kryx^2 + 12 * thr^2 * kryx^2 + 18 * thr^4 * kryx^2 + 24 * thr * kryx^3 + 8 * thr^3 * kryx^3 - 
+                                                                    30 * kryx^4 - 27 * thr^2 * kryx^4 + 6 * thr * kryx^5 + 7 * kryx^6)^2 + 4 * (-(2 - thr^2 + 2 * thr * kryx - 
+                                                                                                                                                      2 * kryx^2)^2 + 
+                                                                                                                                                    6 * (-1 + kryx^2) * 
+                                                                                                                                                    (thr^2 - 2 * thr * kryx + kryx^2))^3)))^(1/3)
+    # calculations generate correlations conditional on Z: rxcvGz and rycvGz
+
+    if (Re(temp) < 0) {
+        output <- "Not valid."} 
+    else {
+        rxcvGz_sepreserve <- Re(sqrt(temp))
+        if (abs(rxcvGz_sepreserve) <= 1){
+            rycvGz_sepreserve <- (kryx - thr * (1 - rxcvGz_sepreserve^2))/rxcvGz_sepreserve
+            output <- list(rxcvGz_sepreserve, rycvGz_sepreserve)
+        } else {
+            output <- "Not valid."
+        }
+    }
+    
+    return(output)
+}
+
+cal_pse2 <- function(thr, kryx){
+    # calculations for preserving standard error
+    i1 <- complex(real = 1, imaginary = -sqrt(3))
+    i2 <- complex(real = 1, imaginary = sqrt(3))
+    temp <- -((2 - thr^2 + 2 * thr * kryx - 2 * kryx^2)/(3 * (-1 + kryx^2))) + 
+        ((i2)*(-(2 - thr^2 + 2 * thr * kryx - 2 * kryx^2)^2 + 6 * (-1 + kryx^2) * (thr^2 - 2 * thr * kryx + kryx^2)))/
+        (3 * 2^(2/3) * (-1 + kryx^2) * (-16 + 15 * thr^2 + 6 * thr^4 + 2 * thr^6 - 30 * thr * kryx - 24 * thr^3 * kryx - 12 * thr^5 * kryx + 39 * kryx^2 + 
+                                            12 * thr^2 * kryx^2 + 18 * thr^4 * kryx^2 + 24 * thr * kryx^3 + 8 * thr^3 * kryx^3 - 30 * kryx^4 - 27 * thr^2 * kryx^4 + 
+                                            6 * thr * kryx^5 + 7 * kryx^6 + sqrt(as.complex((-16 + 15 * thr^2 + 6 * thr^4 + 2 * thr^6 - 30 * thr * kryx - 24 * thr^3 * kryx - 12 * thr^5 * kryx + 
+                                                                                                 39 * kryx^2 + 12 * thr^2 * kryx^2 + 18 * thr^4 * kryx^2 + 24 * thr * kryx^3 + 8 * thr^3 * kryx^3 - 
+                                                                                                 30 * kryx^4 - 27 * thr^2 * kryx^4 + 6 * thr * kryx^5 + 7 * kryx^6)^2 + 
+                                                                                                4 * (-(2 - thr^2 + 2 * thr * kryx - 2 * kryx^2)^2 + 6 * (-1 + kryx^2) * (thr^2 - 2 * thr * kryx + 
+                                                                                                                                                                             kryx^2))^3)))^(1/3)) - 
+        1/(6 * 2^(1/3) * (-1 + kryx^2)) * (i1) * (-16 + 15 * thr^2 + 6 * thr^4 + 2 * thr^6 - 30 * thr * kryx - 24 * thr^3 * kryx - 12 * thr^5 * kryx + 39 * kryx^2 + 
+                                                      12 * thr^2 * kryx^2 + 18 * thr^4 * kryx^2 + 24 * thr * kryx^3 + 8 * thr^3 * kryx^3 - 30 * kryx^4 - 27 * thr^2 * kryx^4 +
+                                                      6 * thr * kryx^5 + 7 * kryx^6 + 
+                                                      sqrt(as.complex((-16 + 15 * thr^2 + 6 * thr^4 + 2 * thr^6 - 30 * thr * kryx - 24 * thr^3 * kryx - 12 * thr^5 * kryx + 
+                                                                           39 * kryx^2 + 12 * thr^2 * kryx^2 + 18 * thr^4 * kryx^2 + 24 * thr * kryx^3 + 8 * thr^3 * kryx^3 - 
+                                                                           30 * kryx^4 - 27 * thr^2 * kryx^4 + 6 * thr * kryx^5 + 7 * kryx^6)^2 + 4 * (-(2 - thr^2 + 2 * thr * kryx - 
+                                                                                                                                                             2 * kryx^2)^2 + 
+                                                                                                                                                           6 * (-1 + kryx^2) * 
+                                                                                                                                                           (thr^2 - 2 * thr * kryx + kryx^2))^3)))^(1/3)
+    # calculations generate correlations conditional on Z: rxcvGz and rycvGz
+
+    if (Re(temp) < 0) {
+        output <- "Not valid."} 
+    else {
+        rxcvGz_sepreserve <- Re(sqrt(temp))
+        if (abs(rxcvGz_sepreserve) <= 1){
+            rycvGz_sepreserve <- (kryx - thr * (1 - rxcvGz_sepreserve^2))/rxcvGz_sepreserve
+            output <- list(rxcvGz_sepreserve, rycvGz_sepreserve)
+        } else {
+            output <- "Not valid."
+        }
+    }
+    
+    return(output)
+    
+}
+
+cal_pse3 <- function(thr, kryx){
     # calculations for preserving standard error
     i1 <- complex(real = 1, imaginary = -sqrt(3))
     i2 <- complex(real = 1, imaginary = sqrt(3))
@@ -213,10 +289,20 @@ cal_pse <- function(thr, kryx){
                                                                                                                                                            6 * (-1 + kryx^2) * 
                                                                                                                                                            (thr^2 - 2 * thr * kryx + kryx^2))^3)))^(1/3)
     # calculations generate correlations conditional on Z: rxcvGz and rycvGz
-    rxcvGz_sepreserve <- Re(sqrt(temp))
-    rycvGz_sepreserve <- (kryx - thr * (1 - rxcvGz_sepreserve^2))/rxcvGz_sepreserve
+    if (Re(temp) < 0) {
+        output <- "Not valid."} 
+    else {
+        rxcvGz_sepreserve <- Re(sqrt(temp))
+        if (abs(rxcvGz_sepreserve) <= 1){
+            rycvGz_sepreserve <- (kryx - thr * (1 - rxcvGz_sepreserve^2))/rxcvGz_sepreserve
+            output <- list(rxcvGz_sepreserve, rycvGz_sepreserve)
+        } else {
+            output <- "Not valid."
+        }
+    }
     
-    return(list(rxcvGz_sepreserve, rycvGz_sepreserve))
+    return(output)
+    
 }
 
 verify_manual <- function(rxy, rxz, rxcv, ryz, rycv, rzcv, sdy, sdx){
@@ -320,6 +406,71 @@ verify_reg_uncond = function(n_obs, sdx, sdy, rxy){
     } else {
         stop("Error!")
     }
+}
+
+gen_fTable <- function(rxcvGz, rycvGz, rcvz, rxy, rxz, rzy, 
+                       n_obs, sdx, sdy, sdz, sdcv, 
+                       ryxGz){
+    # convert conditional correlations to unconditional correlations to be used in new regression
+    rxcv = rxcvGz * sqrt((1 - rcvz^2) * (1 - rxz^2)) + rxz * rcvz
+    rycv = rycvGz * sqrt((1 - rcvz^2) * (1 - rzy^2)) + rzy * rcvz
+    
+    verify_pse_reg_M3 = verify_reg_Gzcv(n_obs, sdx, sdy, sdz, sdcv, rxy, rxz, rzy, rycv, rxcv, rcvz)
+    verfiy_pse_manual_thr = verify_manual(rxy, rxz, rxcv, rzy, rycv, rcvz, sdy, sdx)
+    cov_pse = verify_pse_reg_M3[[11]]
+    
+    # prepare some other values in the final Table (long output)
+    R2_M3 = as.numeric(verify_pse_reg_M3[1])
+    eff_x_M3 = as.numeric(verify_pse_reg_M3[2]) # should be equivalent or very close to eff_thr
+    se_x_M3 = as.numeric(verify_pse_reg_M3[3])
+    beta_x_M3 = as.numeric(verify_pse_reg_M3[9]) # should be equivalent or very close to thr
+    t_x_M3 = eff_x_M3 / se_x_M3 
+    eff_z_M3 = as.numeric(verify_pse_reg_M3[4])
+    se_z_M3 = as.numeric(verify_pse_reg_M3[5])
+    eff_cv_M3 = as.numeric(verify_pse_reg_M3[6])
+    se_cv_M3 = as.numeric(verify_pse_reg_M3[7])
+    
+    verify_pse_reg_M2 = verify_reg_Gz(n_obs, sdx, sdy, sdz, rxy, rxz, rzy)
+    R2_M2 = as.numeric(verify_pse_reg_M2[1])
+    eff_x_M2 = as.numeric(verify_pse_reg_M2[2]) # should be equivalent or very close to est_eff
+    se_x_M2 = as.numeric(verify_pse_reg_M2[3]) # should be equivalent or very close to std_err
+    eff_z_M2 = as.numeric(verify_pse_reg_M2[4]) 
+    se_z_M2 = as.numeric(verify_pse_reg_M2[5]) 
+    t_x_M2 = eff_x_M2 / se_x_M2 
+    
+    verify_pse_reg_M1 = verify_reg_uncond(n_obs, sdx, sdy, rxy)
+    R2_M1 = as.numeric(verify_pse_reg_M1[1]) # should be equivalent or very close to rxy^2
+    eff_x_M1 = as.numeric(verify_pse_reg_M1[2]) # should be equivalent or very close to rxy*sdy/sdx
+    se_x_M1 = as.numeric(verify_pse_reg_M1[3]) 
+    t_x_M1 = eff_x_M1 / se_x_M1 
+    
+    fTable <- matrix(c(R2_M1, R2_M2, R2_M3, # R2 for three reg models
+                       eff_x_M1, eff_x_M2, eff_x_M3, # unstd reg coef for X in three reg  models
+                       se_x_M1, se_x_M2, se_x_M3, # unstd reg se for X in three reg models
+                       rxy, ryxGz, beta_x_M3, # std reg coef for X in three reg models
+                       t_x_M1, t_x_M2, t_x_M3, # t values for X in three reg models
+                       NA, eff_z_M2, eff_z_M3, # reg coef for Z in three reg models
+                       NA, se_z_M2, se_z_M3, # se for Z in three reg models
+                       NA, eff_z_M2 / se_z_M2, eff_z_M3 / se_z_M3, # t for Z in three reg models,
+                       NA, NA, eff_cv_M3, # reg coef for CV in three reg models
+                       NA, NA, se_cv_M3, # se for CV in three reg models
+                       NA, NA, eff_cv_M3 / se_cv_M3), # t for CV in three reg models
+                     nrow = 11, ncol = 3, byrow = T) 
+    
+    rownames(fTable) <- c("R2", "coef_X", "SE_X", "std_coef_X", "t_X",
+                          "coef_Z", "SE_Z", "t_Z",
+                          "coef_CV", "SE_CV", "t_CV")
+    
+    colnames(fTable) <- c("M1:X", "M2:X,Z", "M3:X,Z,CV")
+    
+    output <- list("correlation between X and CV conditional on Z" = rxcvGz, 
+                   "correlation between Y and CV conditional on Z" = rycvGz, 
+                   "correlation between X and CV" = rxcv, 
+                   "correlation between Y and CV" = rycv,
+                   "covariance matrix" = cov_pse, 
+                   "Table" = fTable)
+    
+    return(output)
 }
 
 
