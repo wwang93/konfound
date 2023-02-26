@@ -25,6 +25,9 @@ test_sensitivity <- function(est_eff,
                              std_err,
                              n_obs,
                              n_covariates,
+                             #rsq,
+                             #sdx,
+                             #sdy,
                              alpha,
                              tails,
                              index,
@@ -81,6 +84,14 @@ test_sensitivity <- function(est_eff,
   itcv <- (obs_r - critical_r) / (1 + mp * abs(critical_r))
   # finding correlation of confound to invalidate / sustain inference
   r_con <- round(sqrt(abs(itcv)), 3)
+  
+  #rsqYZ <- ((obs_r ^ 2) - rsq)/((obs_r ^ 2) - 1)
+  #VarY = sdy^2
+  #VarX = sdx^2
+  #rsqXZ = max(0, 1 - ((VarY * (1 - rsq))) / (VarX * (n_obs - n_covariates - 2) * (sdx * 2)))
+  #r_ycv = r_con * sqrt(1 - rsqYZ)
+  #r_xcv = r_con * sqrt(1 - rsqXZ)
+  #un_impact = itcv * sqrt(1 - rsqYZ) * sqrt(1 - rsqXZ)
 
   # if (component_correlations == FALSE){
   #     rsq <- # has to come from some kind of model object

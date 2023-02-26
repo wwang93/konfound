@@ -17,6 +17,8 @@ konfound_lmer <- function(model_object, tested_variable_string, test_all, alpha,
     std_err <- coef_df$std.error
     df_kr <- get_kr_df(model_object)
     df_kr <- df_kr[names(df_kr) == tested_variable_string]
+    #rsq <- summary(model_object)$r.squared
+    #need to extract sdx and sdy 
   } else {
     coef_df <- tidy_output[-1, ] # to remove intercept
     coef_df <- filter(coef_df, !is.na(coef_df$std.error))
