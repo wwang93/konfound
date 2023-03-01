@@ -85,28 +85,12 @@ test_sensitivity <- function(est_eff,
   # finding correlation of confound to invalidate / sustain inference
   r_con <- round(sqrt(abs(itcv)), 3)
   
-  #rsqYZ <- ((obs_r ^ 2) - rsq)/((obs_r ^ 2) - 1)
-  #VarY = sdy^2
-  #VarX = sdx^2
-  #rsqXZ = max(0, 1 - ((VarY * (1 - rsq))) / (VarX * (n_obs - n_covariates - 2) * (sdx * 2)))
-  #r_ycv = r_con * sqrt(1 - rsqYZ)
-  #r_xcv = r_con * sqrt(1 - rsqXZ)
-  #un_impact = itcv * sqrt(1 - rsqYZ) * sqrt(1 - rsqXZ)
-
-  # if (component_correlations == FALSE){
-  #     rsq <- # has to come from some kind of model object
-  #         varY <- # has to come from some kind of model object
-  #         varX <- # has to come from some kind of model object
-  #         sdX <- # has to come from some kind of model object
-  #
-  #         rsqYZ = (((obs_r ^ 2) - Rsq) / ((obs_r ^ 2) - 1))
-  #
-  #     rsqXZ = max(0, 1 - ((VarY * (1 - RSQ))) / (VarX * (n_obs - n_covariates - 2) * (sdx * 2)))
-  #
-  #     r_ycv = r_con * sqrt(1 - rsqYZ)
-  #     r_xcv = r_con * sqrt(1 - rsqXZ)
-  #     # before conditioning on observed covariates
-  # }
+  # calculate unconditional itcv 
+  # rsqYZ <- ((obs_r ^ 2) - rsq)/((obs_r ^ 2) - 1)
+  # rsqXZ = max(0, 1 - ((var_y * (1 - rsq))) / (var_x * (n_obs - n_covariates - 2) * (sqrt(var_x) * 2)))
+  # r_ycv_uncond = r_con * sqrt(1 - rsqYZ)
+  # r_xcv_uncond = r_con * sqrt(1 - rsqXZ)
+  # impact_uncond = itcv * sqrt(1 - rsqYZ) * sqrt(1 - rsqXZ)
 
   # output dispatch
 
